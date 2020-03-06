@@ -8,6 +8,10 @@ RUN groupadd --gid 1000 archiva && useradd --gid 1000 -g archiva archiva
 ENV ARCHIVA_HOME /archiva
 ENV ARCHIVA_BASE /archiva-data
 
+#ENV BUILD_SNAPSHOT_RELEASE true
+ENV ARCHIVA_VERSION latest
+ENV MYSQL_CONNECTOR_VERSION latest
+
 #
 # Capture the external resources in two a layers.
 # 
@@ -38,3 +42,4 @@ STOPSIGNAL SIGINT
 
 # Use our custom entrypoint
 ENTRYPOINT [ "/entrypoint.sh" ]
+
