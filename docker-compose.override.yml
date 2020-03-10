@@ -1,0 +1,13 @@
+version: '3.4'
+services:
+  archiva:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: durist/archiva
+    ports: [ "8080:8080" ]
+    networks:
+      - container
+      
+networks:
+  container:
