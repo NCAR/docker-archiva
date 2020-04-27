@@ -16,6 +16,18 @@ DB_TYPE=${DB_TYPE:-derby}
 JETTY_CONFIG_PATH=${JETTY_CONFIG_PATH:-/tmp/jetty.xml}
 
 #
+# DEBUG
+#
+echo "######### DEBUG ##########"
+id
+df -h
+if [ -d $ARCHIVA_BASE ]; then
+    ls -l $ARCHIVA_BASE
+fi
+echo "######### DEBUG ##########"
+
+
+#
 # Initialize the volume data directories
 #
 for datadir in "${EXTERNAL_DATA_DIRS[@]}"

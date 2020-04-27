@@ -12,22 +12,11 @@ mv /tmp/healthcheck.sh /healthcheck.sh
 mv /tmp/upgrade_v2.sh /upgrade_v2.sh
 chmod +x /entrypoint.sh /healthcheck.sh /upgrade_v2.sh
 
-
-#
-# DEBUG
-#
-echo "######### DEBUG ##########"
-id
-df -h
-echo "######### DEBUG ##########"
-
 #
 # Initialize the data directories
 #
 mkdir -p $ARCHIVA_BASE
 mkdir -p $TEMPLATE_ROOT
-
-echo "######### GOT HERE ##########"
 
 #
 # Initialize the template directories
