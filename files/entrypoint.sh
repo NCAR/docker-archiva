@@ -24,7 +24,7 @@ echo "######### DF ##########"
 df -h
 echo "######### ARCHIVA_BASE ##########"
 echo "ARCHIVA_BASE: $ARCHIVA_BASE"
-ls -l $ARCHIVA_BASE || /bin/true
+ls -ld $ARCHIVA_BASE || /bin/true
 echo "######### DEBUG DONE ##########"
 
 #
