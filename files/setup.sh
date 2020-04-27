@@ -16,15 +16,18 @@ chmod +x /entrypoint.sh /healthcheck.sh /upgrade_v2.sh
 #
 # DEBUG
 #
+echo "######### DEBUG ##########"
 id
 df -h
-ls -l /archiva-data
+echo "######### DEBUG ##########"
 
 #
 # Initialize the data directories
 #
 mkdir -p $ARCHIVA_BASE
 mkdir -p $TEMPLATE_ROOT
+
+echo "######### GOT HERE ##########"
 
 #
 # Initialize the template directories
