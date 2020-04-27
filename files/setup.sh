@@ -12,6 +12,14 @@ mv /tmp/healthcheck.sh /healthcheck.sh
 mv /tmp/upgrade_v2.sh /upgrade_v2.sh
 chmod +x /entrypoint.sh /healthcheck.sh /upgrade_v2.sh
 
+
+#
+# DEBUG
+#
+id
+df -h
+ls -l /archiva-data
+
 #
 # Initialize the data directories
 #
