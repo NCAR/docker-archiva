@@ -18,14 +18,14 @@ JETTY_CONFIG_PATH=${JETTY_CONFIG_PATH:-/tmp/jetty.xml}
 #
 # DEBUG
 #
-echo "######### DEBUG ##########"
+echo "######### ID ##########"
 id
+echo "######### DF ##########"
 df -h
-if [ -d $ARCHIVA_BASE ]; then
-    ls -l $ARCHIVA_BASE
-fi
-echo "######### DEBUG ##########"
-
+echo "######### ARCHIVA_BASE ##########"
+echo "ARCHIVA_BASE: $ARCHIVA_BASE"
+ls -l $ARCHIVA_BASE || /bin/true
+echo "######### DEBUG DONE ##########"
 
 #
 # Initialize the volume data directories
