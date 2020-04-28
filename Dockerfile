@@ -35,8 +35,8 @@ HEALTHCHECK CMD /healthcheck.sh
 USER archiva
 
 # The volume for archiva
-VOLUME /archiva-data
-RUN chown archiva:archiva /archiva-data
+#VOLUME /archiva-data
+RUN mkdir /archiva-data && chown archiva:archiva /archiva-data
 
 # Use SIGINT for stopping
 STOPSIGNAL SIGINT
