@@ -1,5 +1,5 @@
 FROM openjdk:8
-MAINTAINER Dan Urist <durist@ucar.edu>
+LABEL maintainer="Dan Urist <durist@ucar.edu>"
 
 # Add the archiva user and group with a specific UID/GUI to ensure
 RUN groupadd --gid 1000 archiva && useradd --gid 1000 -g archiva archiva
@@ -35,8 +35,8 @@ HEALTHCHECK CMD /healthcheck.sh
 USER archiva
 
 # The volume for archiva
-RUN chown archiva:archiva /archiva-data
 VOLUME /archiva-data
+RUN chown archiva:archiva /archiva-data
 
 # Use SIGINT for stopping
 STOPSIGNAL SIGINT
