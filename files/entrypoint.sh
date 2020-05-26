@@ -32,16 +32,14 @@ echo "######### DEBUG DONE ##########"
 #
 for datadir in "${EXTERNAL_DATA_DIRS[@]}"
 do
-  if [ ! -e ${ARCHIVA_BASE}/${datadir} ]
-  then
-    if [ -e ${TEMPLATE_ROOT}/${datadir} ]
-    then
-      echo "Populating $datadir from template..."
-      cp -pr ${TEMPLATE_ROOT}/${datadir} ${ARCHIVA_BASE}/${datadir}
-    else
-      echo "Creating empty directory for $datadir..."
-      mkdir ${ARCHIVA_BASE}/${datadir}
-    fi
+  if [ ! -e ${ARCHIVA_BASE}/${datadir} ]; then
+        if [ -e ${TEMPLATE_ROOT}/${datadir} ]; then
+	    echo "Populating $datadir from template..."
+	    cp -pr ${TEMPLATE_ROOT}/${datadir} ${ARCHIVA_BASE}/${datadir}
+	else
+	    echo "Creating empty directory for $datadir..."
+	    mkdir ${ARCHIVA_BASE}/${datadir}
+	fi
   fi
 done
 
