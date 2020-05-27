@@ -10,7 +10,9 @@ chown archiva.archiva $ARCHIVA_BASE
 
 
 echo "Switching to user archiva"
-cat <<"EOF" | su -g archiva archiva -c bash 
+
+#cat <<"EOF" | su -g archiva archiva -c bash
+cat <<"EOF" | su archiva -c bash 
 source /config.env
 echo "########### ENV ############"
 env
