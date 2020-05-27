@@ -6,14 +6,10 @@
 set -e
 source /config.env
 
-# If we're root, chown ARCHIVA_BASE to archiva and re-execute script
-# Hack to deal with docker volume owned by root b/c EFS access point
-# auth doesn't work yet.
-echo "$0 running as user $UID"
-if [ $UID -eq 0 ]; then
-    chown archiva.archiva $ARCHIVA_BASE
-    exec su archiva "$0" -- "$@"
-fi
+chown archiva.archiva $ARCHIVA_BASE
+
+echo "Switching to user archiva"
+cat <<"EOF" | su -g archiva archiva -c bash 
 
 if [[ -z "$SMTP_HOST" && -z "$JETTY_CONFIG_PATH" ]]
 then
@@ -140,3 +136,5 @@ export MYSQL_JDBC_URL
 exec java $JVM_EXTRA_OPTS ${JVM_OPTS[@]}\
   org.eclipse.jetty.start.Main\
   "$JETTY_CONFIG_PATH"
+
+EOF
