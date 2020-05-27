@@ -8,8 +8,13 @@ source /config.env
 
 chown archiva.archiva $ARCHIVA_BASE
 
+
 echo "Switching to user archiva"
 cat <<"EOF" | su -g archiva archiva -c bash 
+
+echo "########### ENV ############"
+env
+echo "############################"
 
 if [[ -z "$SMTP_HOST" && -z "$JETTY_CONFIG_PATH" ]]
 then
