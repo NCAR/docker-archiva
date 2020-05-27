@@ -6,6 +6,15 @@
 set -e
 source /config.env
 
+# If we're root, chown ARCHIVA_BASE to archiva and re-execute script
+# Hack to deal with docker volume owned by root b/c EFS access point
+# auth doesn't work yet.
+echo "$0 running as user $UID"
+if [ $UID -eq 0 ]; then
+    chown archiva.archiva $ARCHIVA_BASE
+    exec su archiva "$0" -- "$@"
+fi
+
 if [[ -z "$SMTP_HOST" && -z "$JETTY_CONFIG_PATH" ]]
 then
   echo "WARNING: SMTP_HOST not set, Archiva cannot send emails!" > /dev/stderr
@@ -14,18 +23,6 @@ fi
 JVM_MAX_MEM=${JVM_MAX_MEM:-512}
 DB_TYPE=${DB_TYPE:-derby}
 JETTY_CONFIG_PATH=${JETTY_CONFIG_PATH:-/tmp/jetty.xml}
-
-#
-# DEBUG
-#
-echo "######### ID ##########"
-id
-echo "######### DF ##########"
-df -h
-echo "######### ARCHIVA_BASE ##########"
-echo "ARCHIVA_BASE: $ARCHIVA_BASE"
-ls -ld $ARCHIVA_BASE || /bin/true
-echo "######### DEBUG DONE ##########"
 
 #
 # Initialize the volume data directories
@@ -37,7 +34,7 @@ do
 	    echo "Populating $datadir from template..."
 	    cp -pr ${TEMPLATE_ROOT}/${datadir} ${ARCHIVA_BASE}/${datadir}
 	else
-	    echo "Creating empty directory for $datadir..."
+	    echo "Template dir not found; creating empty directory for $datadir..."
 	    mkdir ${ARCHIVA_BASE}/${datadir}
 	fi
   fi
@@ -136,7 +133,7 @@ fi
 #
 # Perform any upgrades required for the v2 image.
 #
-./upgrade_v2.sh
+#./upgrade_v2.sh
 
 cd ${ARCHIVA_HOME}
 export MYSQL_JDBC_URL
