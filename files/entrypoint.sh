@@ -13,7 +13,7 @@ cat <<"EOF" | su -g archiva archiva -c bash
 
 if [[ -z "$SMTP_HOST" && -z "$JETTY_CONFIG_PATH" ]]
 then
-  echo "WARNING: SMTP_HOST not set, Archiva cannot send emails!" > /dev/stderr
+  echo "WARNING: SMTP_HOST not set, Archiva cannot send emails!" 1>&2
 fi
 
 JVM_MAX_MEM=${JVM_MAX_MEM:-512}
